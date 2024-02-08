@@ -25,10 +25,11 @@ import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
     static private final Float CONVERSION_RATE = 0.80F;
+    static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("Task-3", "onCreate() called");
+        Log.d(TAG, "Enter onCreate()");
         setContentView(R.layout.activity_main);
 
         Button buttonConvert = findViewById(R.id.convertButton);
@@ -36,12 +37,12 @@ public class MainActivity extends AppCompatActivity {
         buttonConvert.setOnClickListener( view ->  {
             convertCurrency(view);
         } );
-        Log.d("Task-3", "onCreate() finished");
+        Log.d(TAG, "Exit onCreate()");
     }
 
     public void convertCurrency(View view) {
         // Entry point log message
-        Log.d("Task-3", "convertCurrency() start"); 
+        Log.d("convertCurrency", "Enter convertCurrency()"); 
         
         EditText inputView = findViewById(R.id.entryId);
 
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
             resultView.setText( resultFloat + " Euros" );
         }
         
-        Log.d("Task-3", "convertCurrency() finished"); // Exit point log message
+        // Exit point log message
+        Log.d("convertCurrency", "Exit convertCurrency()"); 
     }
 }
