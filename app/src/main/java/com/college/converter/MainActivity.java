@@ -1,6 +1,7 @@
 package com.college.converter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.util.Log;
+
+import com.college.converter.R;
+import com.college.converter.databinding.ActivityMainBinding;
 
 /*
     TODOs:
@@ -24,6 +28,7 @@ import android.util.Log;
 */
 
 public class MainActivity extends AppCompatActivity {
+    private ActivityMainBinding variableBinding;
     static private final Float CONVERSION_RATE = 0.80F;
     static final String TAG = "MainActivity";
     @Override
@@ -31,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "Enter onCreate()");
         setContentView(R.layout.activity_main);
+        //implement binding
+        variableBinding = ActivityMainBinding.inflate(getLayoutInflater());
 
-        Button buttonConvert = findViewById(R.id.convertButton);
+        Button buttonConvert = variableBinding.convertButton;
 
         buttonConvert.setOnClickListener( view ->  {
             convertCurrency(view);
@@ -41,21 +48,26 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void convertCurrency(View view) {
+
         // Entry point log message
         Log.d("convertCurrency", "Enter convertCurrency()"); 
         
-        EditText inputView = findViewById(R.id.entryId);
+
+        EditText inputView = variableBinding.entryId;
+//        findViewById(R.id.entryId);
+
 
         String inputAmount = inputView.getText().toString();
 
-        TextView resultView = findViewById(R.id.resultId);
+        TextView resultView = variableBinding.resultId;
+//        findViewById(R.id.resultId);
 
         if (!inputAmount.isEmpty()) {
             Float inputAmountDecimal = Float.valueOf(inputAmount);
 
             Float resultFloat = inputAmountDecimal * CONVERSION_RATE;
 
-            resultView.setText( resultFloat + " Euros" );
+            resultView.setText( resultFloat + getString(R.string.euros_message) );
         }
         
         // Exit point log message
