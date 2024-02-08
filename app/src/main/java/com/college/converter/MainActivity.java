@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.util.Log;
 
 import com.college.converter.R;
 import com.college.converter.databinding.ActivityMainBinding;
@@ -29,9 +30,11 @@ import com.college.converter.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding variableBinding;
     static private final Float CONVERSION_RATE = 0.80F;
+    static final String TAG = "MainActivity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.d(TAG, "Enter onCreate()");
         setContentView(R.layout.activity_main);
         //implement binding
         variableBinding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -41,12 +44,18 @@ public class MainActivity extends AppCompatActivity {
         buttonConvert.setOnClickListener( view ->  {
             convertCurrency(view);
         } );
+        Log.d(TAG, "Exit onCreate()");
     }
 
     public void convertCurrency(View view) {
 
+        // Entry point log message
+        Log.d("convertCurrency", "Enter convertCurrency()"); 
+        
+
         EditText inputView = variableBinding.entryId;
 //        findViewById(R.id.entryId);
+
 
         String inputAmount = inputView.getText().toString();
 
@@ -60,5 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
             resultView.setText( resultFloat + getString(R.string.euros_message) );
         }
+        
+        // Exit point log message
+        Log.d("convertCurrency", "Exit convertCurrency()"); 
     }
 }
