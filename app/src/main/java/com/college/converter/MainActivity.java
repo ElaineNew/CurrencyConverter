@@ -35,41 +35,38 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.d(TAG, "Enter onCreate()");
-        setContentView(R.layout.activity_main);
+
         //implement binding
         variableBinding = ActivityMainBinding.inflate(getLayoutInflater());
 
+//        setContentView(R.layout.activity_main);
+        setContentView(variableBinding.getRoot());
         Button buttonConvert = variableBinding.convertButton;
 
         buttonConvert.setOnClickListener( view ->  {
+            Log.d(TAG, "Clicked btn");
+
             convertCurrency(view);
         } );
+
         Log.d(TAG, "Exit onCreate()");
     }
 
     public void convertCurrency(View view) {
-
         // Entry point log message
         Log.d("convertCurrency", "Enter convertCurrency()"); 
-        
 
         EditText inputView = variableBinding.entryId;
-//        findViewById(R.id.entryId);
-
 
         String inputAmount = inputView.getText().toString();
 
         TextView resultView = variableBinding.resultId;
-//        findViewById(R.id.resultId);
 
         if (!inputAmount.isEmpty()) {
             Float inputAmountDecimal = Float.valueOf(inputAmount);
-
             Float resultFloat = inputAmountDecimal * CONVERSION_RATE;
-
             resultView.setText( resultFloat + getString(R.string.euros_message) );
         }
-        
         // Exit point log message
         Log.d("convertCurrency", "Exit convertCurrency()"); 
     }
